@@ -6,22 +6,25 @@ def main():
     if len(sys.argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
-
+    
     a = int(sys.argv[1])
     b = int(sys.argv[3])
     operator = sys.argv[2]
 
     if operator == '+':
-        print("{} + {} = {}".format(a, b, add(a, b)))
+        result = add(a, b)
     elif operator == '-':
-        print("{} - {} = {}".format(a, b, sub(a, b)))
+        result = sub(a, b)
     elif operator == '*':
-        print("{} * {} = {}".format(a, b, mul(a, b)))
+        result = mul(a, b)
     elif operator == '/':
-        print("{} / {} = {}".format(a, b, div(a, b)))
+        result = div(a, b)
     else:
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
+
+    print("{} {} {} = {}".format(a, operator, b, result))
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
