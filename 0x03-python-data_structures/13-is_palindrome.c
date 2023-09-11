@@ -29,7 +29,7 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *slow = *head, *fast = *head, *second_half, *prev_slow = NULL;
 
-	if (!head || !*head)
+	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
 	while (fast && fast->next)
