@@ -1,89 +1,63 @@
 #include "lists.h"
-#include <stdlib.h>
 #include <stdio.h>
 
 /**
- * list_size - Calculates the size of a linked list.
- * @head: Pointer to the head of the linked list.
- * Return: Size of the list.
+ * reverse - Reverses a linked list from a given node.
+ * @head: A pointer to the node to start the reverse from.
+ * Return: Pointer to the first node of the reversed list.
  */
-int list_size(listint_t *head)
+listint_t *reverse(listint_t *head)
 {
-	listint_t *fast = head, *slow = head;
-	int size = 0;
+	listint_t *prev = NULL, *current = head, *next = NULL;
 
-	while (fast && fast->next)
+	while (current)
 	{
-		fast = fast->next->next;
-		slow = slow->next;
-		size++;
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
 	}
-
-	size *= 2;
-	if (fast)
-		return (size + 1);
-	return (size);
+	return (prev);
 }
 
 /**
- * fill_stack - Fills a stack from a linked list.
- * @head: Pointer to the head of the linked list.
- * @stack: Pointer to the stack.
- * @size: Size of the list.
- */
-void fill_stack(listint_t *head, int *stack, int size)
-{
-	int i;
-	listint_t *tmp = head;
-
-	for (i = 0; i < size / 2; i++, tmp = tmp->next)
-		stack[i] = tmp->n;
-}
-
-/**
- * is_palindrome - checks if a singly linked list is a palindrome.
- * @head: head of the linked list.
+ * is_palindrome - Checks if a singly linked list is a palindrome.
+ * @head: A pointer to the head of the linked list.
  * Return: 0 if not a palindrome, 1 if it is a palindrome.
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head, *fast = *head, *prev = NULL, *second_half = NULL;
-	int size;
-	int *stack;
+	listint_t *slow = *head, *fast = *head, *second_half, *prev_slow = NULL;
 
-	if (!*head)
+	if (!head || !*head)
 		return (1);
-
-	size = list_size(*head);
-	stack = (int *)malloc((size / 2) * sizeof(int));
-
-	if (!stack)
-		return (0);
 
 	while (fast && fast->next)
 	{
 		fast = fast->next->next;
-		prev = slow;
+		prev_slow = slow;
 		slow = slow->next;
 	}
+
 	if (fast)
 		slow = slow->next;
-	if (prev)
-		prev->next = NULL;
 
-	second_half = slow;
-	fill_stack(*head, stack, size);
+	second_half = reverse(slow);
+	prev_slow->next = NULL;
 
-	while (second_half && size > 0)
+	while (*head && second_half)
 	{
-		if (stack[--size] != second_half->n)
+		if ((*head)->n != second_half->n)
 		{
-			free(stack);
+			reverse(second_half);
 			return (0);
 		}
+		*head = (*head)->next;
 		second_half = second_half->next;
 	}
 
-	free(stack);
-	return (1);
+	if (!(*head) && !second_half)
+		return (1);
+
+	return (0);
 }
