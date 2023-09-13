@@ -20,8 +20,8 @@ void print_python_bytes(PyObject *p)
 		return;
 	}
 
-	size = PyBytes_Size(p);
-	str = PyBytes_AsString(p);
+	size = ((PyVarObject *)(p))->ob_size;
+	str = ((PyBytesObject *)p)->ob_sval;
 
 	printf("  size: %ld\n", size);
 	printf("  trying string: %s\n", str);
