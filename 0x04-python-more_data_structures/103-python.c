@@ -2,12 +2,12 @@
 #include <Python.h>
 
 /**
- * print_info_bytes - Prints details about a Python bytes object.
+ * print_python_bytes - Prints details about a Python bytes object.
  * @p: The Python bytes object.
  *
  * Return: Void.
  */
-void print_info_bytes(PyObject *p)
+void print_python_bytes(PyObject *p)
 {
 	char *str;
 	long int size, i, limit;
@@ -37,13 +37,13 @@ void print_info_bytes(PyObject *p)
 }
 
 /**
- * print_info_list - Prints details about a Python list, and any bytes
+ * print_python_list - Prints details about a Python list, and any bytes
  *				   objects within it.
  * @p: The Python list object.
  *
  * Return: Void.
  */
-void print_info_list(PyObject *p)
+void print_python_list(PyObject *p)
 {
 	long int size, i;
 	PyObject *item;
@@ -64,6 +64,6 @@ void print_info_list(PyObject *p)
 		printf("Element %ld: %s\n", i, Py_TYPE(item)->tp_name);
 
 		if (PyBytes_Check(item))
-			print_info_bytes(item);
+			print_python_bytes(item);
 	}
 }
