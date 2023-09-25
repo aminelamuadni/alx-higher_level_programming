@@ -8,7 +8,7 @@ def safe_print_integer_err(value):
 
     If the value provided is not an integer, the function will print an
     error message to stderr, which describes the error encountered.
-    
+
     Args:
         value: The value to be printed. Can be of any type.
 
