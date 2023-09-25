@@ -2,28 +2,6 @@
 #include <stdio.h>
 
 /**
- * print_python_float - Prints Python float objects
- * @p: pointer to a python object
- */
-void print_python_float(PyObject *p)
-{
-	double value;
-	char *str;
-
-	fflush(stdout);
-	printf("[.] float object info\n");
-	if (!PyFloat_CheckExact(p))
-	{
-		printf("  [ERROR] Invalid Float Object\n");
-		return;
-	}
-
-	value = ((PyFloatObject *)p)->ob_fval;
-	str = PyOS_double_to_string(value, 'r', 0, Py_DTSF_ADD_DOT_0, NULL);
-	printf("  value: %s\n", str);
-}
-
-/**
  * print_python_bytes - Prints Python byte objects
  * @p: pointer to a python object
  */
@@ -45,13 +23,34 @@ void print_python_bytes(PyObject *p)
 	printf("  size: %zd\n", size);
 	str = (assert(PyBytes_Check(p)), (((PyBytesObject *)(p))->ob_sval));
 
-	printf("  size: %zd\n", size);
 	printf("  trying string: %s\n", str);
 
 	printf("  first %zd bytes:", size < 10 ? size + 1 : 10);
 	for (index = 0; index < size + 1 && index < 10; index++)
 		printf(" %02hhx", str[index]);
 	printf("\n");
+}
+
+/**
+ * print_python_float - Prints Python float objects
+ * @p: pointer to a python object
+ */
+void print_python_float(PyObject *p)
+{
+	double value;
+	char *str;
+
+	fflush(stdout);
+	printf("[.] float object info\n");
+	if (!PyFloat_CheckExact(p))
+	{
+		printf("  [ERROR] Invalid Float Object\n");
+		return;
+	}
+
+	value = ((PyFloatObject *)p)->ob_fval;
+	str = PyOS_double_to_string(value, 'r', 0, Py_DTSF_ADD_DOT_0, NULL);
+	printf("  value: %s\n", str);
 }
 
 /**
