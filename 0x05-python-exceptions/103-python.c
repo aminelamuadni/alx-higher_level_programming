@@ -67,21 +67,22 @@ void print_python_list(PyObject *p)
 	fflush(stdout);
 	printf("[*] Python list info\n");
 
-	if (PyList_CheckExact(p))
+	if (!PyList_CheckExact(p))
 	{
-		size = PyList_GET_SIZE(p);
-		printf("[*] Size of the Python List = %zd\n", size);
-		printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
-		for (index = 0; index < size; index++)
-		{
-			item = PyList_GetItem(p, index);
-			printf("Element %d: %s\n", index, item->ob_type->tp_name);
-			if (PyBytes_Check(item))
-				print_python_bytes(item);
-			else if (PyFloat_Check(item))
-				print_python_float(item);
-		}
-	} else {
 		printf("  [ERROR] Invalid List Object\n");
+		return;
+	}
+
+	size = PyList_GET_SIZE(p);
+	printf("[*] Size of the Python List = %zd\n", size);
+	printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
+	for (index = 0; index < size; index++)
+	{
+		item = PyList_GetItem(p, index);
+		printf("Element %d: %s\n", index, item->ob_type->tp_name);
+		if (PyBytes_Check(item))
+			print_python_bytes(item);
+		else if (PyFloat_Check(item))
+			print_python_float(item);
 	}
 }
