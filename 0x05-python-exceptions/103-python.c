@@ -2,6 +2,28 @@
 #include <stdio.h>
 
 /**
+ * print_python_float - Prints Python float objects
+ * @p: pointer to a python object
+ */
+void print_python_float(PyObject *p)
+{
+	double value;
+	char *str;
+
+	fflush(stdout);
+	printf("[.] float object info\n");
+	if (!PyFloat_CheckExact(p))
+	{
+		printf("  [ERROR] Invalid Float Object\n");
+		return;
+	}
+
+	value = ((PyFloatObject *)p)->ob_fval;
+	str = PyOS_double_to_string(value, 'r', 0, Py_DTSF_ADD_DOT_0, NULL);
+	printf("  value: %s\n", str);
+}
+
+/**
  * print_python_bytes - Prints Python byte objects
  * @p: pointer to a python object
  */
@@ -33,28 +55,6 @@ void print_python_bytes(PyObject *p)
 }
 
 /**
- * print_python_float - Prints Python float objects
- * @p: pointer to a python object
- */
-void print_python_float(PyObject *p)
-{
-	double value;
-	char *str;
-
-	fflush(stdout);
-	printf("[.] float object info\n");
-	if (!PyFloat_CheckExact(p))
-	{
-		printf("  [ERROR] Invalid Float Object\n");
-		return;
-	}
-
-	value = ((PyFloatObject *)p)->ob_fval;
-	str = PyOS_double_to_string(value, 'r', 0, Py_DTSF_ADD_DOT_0, NULL);
-	printf("  value: %s\n", str);
-}
-
-/**
  * print_python_list - Prints Python list objects
  * @p: pointer to a python object
  */
@@ -78,7 +78,7 @@ void print_python_list(PyObject *p)
 	printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
 	for (index = 0; index < size; index++)
 	{
-		item = PyList_GetItem(p, index);
+		item = PyList_GET_ITEM(p, index);
 		printf("Element %d: %s\n", index, item->ob_type->tp_name);
 		if (PyBytes_Check(item))
 			print_python_bytes(item);
