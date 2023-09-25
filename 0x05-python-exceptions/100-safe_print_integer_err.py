@@ -2,7 +2,6 @@
 
 import sys
 
-
 def safe_print_integer_err(value):
     """
     Attempts to print an integer followed by a new line.
@@ -19,7 +18,7 @@ def safe_print_integer_err(value):
     """
     try:
         print("{:d}".format(value))
-        return True
+        return (True)
     except (ValueError, TypeError):
         print("Exception: {}".format(sys.exc_info()[1]), file=sys.stderr)
-        return False
+        return (False)
