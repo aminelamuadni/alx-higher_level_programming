@@ -1,7 +1,19 @@
 #!/usr/bin/python3
 
 def safe_print_integer_err(value):
-    """Prints an integer or an error message if not possible."""
+    """
+    Attempts to print an integer followed by a new line.
+
+    If the value provided is not an integer, the function will print an
+    error message to stderr, which describes the error encountered.
+    
+    Args:
+        value: The value to be printed. Can be of any type.
+
+    Returns:
+        True if the value was successfully printed as an integer.
+        False otherwise.
+    """
     try:
         print("{:d}".format(value))
         return True
