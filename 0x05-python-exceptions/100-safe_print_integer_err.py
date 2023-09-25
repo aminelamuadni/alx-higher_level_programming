@@ -10,7 +10,7 @@ def safe_print_integer_err(value):
     error message to stderr, which describes the error encountered.
 
     Args:
-        value: The value to be printed. Can be of any type.
+        value (int): The value to be printed. Can be of any type.
 
     Returns:
         True if the value was successfully printed as an integer.
