@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Definition of the class 'Square' with controlled access to the private attribute 'size' 
-and a method to compute its area.
+Class 'Square' with a private attribute 'size' and controlled access methods.
 """
 
 
