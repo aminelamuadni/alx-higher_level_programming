@@ -3,6 +3,7 @@
 Square class with controlled access to the private attribute 'size'.
 """
 
+
 class Square:
     """
     A representation of a square.
