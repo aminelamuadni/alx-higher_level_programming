@@ -1,0 +1,30 @@
+Test the add_integer function.
+>>> add_integer = __import__('0-add_integer').add_integer
+
+Check normal addition of two integers.
+>>> add_integer(1, 2)
+3
+
+Check normal addition with default argument.
+>>> add_integer(2)
+100
+
+Check addition of an integer and a float.
+>>> add_integer(100, -2.5)
+98
+
+Check addition of two floats.
+>>> add_integer(100.3, -2)
+98
+
+Check TypeError for a string argument.
+>>> add_integer(4, "School")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+Check TypeError for None argument.
+>>> add_integer(None)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
