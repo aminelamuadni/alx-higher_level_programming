@@ -5,7 +5,7 @@
 
 class Rectangle:
     """Class that defines a rectangle.
-    
+
     This is an empty class for now. More attributes and methods
     may be added later.
     """
