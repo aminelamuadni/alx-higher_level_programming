@@ -8,6 +8,7 @@ properties like width, height, and methods to calculate area, perimeter,
 and its string representation.
 """
 
+
 class Rectangle:
     """Class that defines a rectangle.
 
