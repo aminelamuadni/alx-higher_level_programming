@@ -18,7 +18,7 @@ class Rectangle:
         number_of_instances (int): number of Rectangle instances.
     """
     
-    number_of_instances = 0  # class attribute
+    number_of_instances = 0
 
     def __init__(self, width=0, height=0):
         """Initialize a new rectangle with given width and height.
@@ -65,7 +65,7 @@ class Rectangle:
 
     def perimeter(self):
         """Return the perimeter of the rectangle.
-        
+
         If width or height is 0, returns 0.
         """
         if self.__width == 0 or self.__height == 0:
