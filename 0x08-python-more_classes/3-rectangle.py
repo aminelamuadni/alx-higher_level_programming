@@ -1,7 +1,5 @@
-#!/usr/bin/python3
 
-"""
-Module for defining a rectangle.
+dule for defining a rectangle.
 
 This module provides functionalities related to a rectangle, including
 properties like width, height, and methods to calculate area, perimeter, 
@@ -76,4 +74,4 @@ class Rectangle:
 
     def __repr__(self):
         """Return the official string representation of the rectangle."""
-        return "{} whitespace before '{}'".format(self.__width, self.__height)
+        return "Rectangle({}, {})".format(self.__width, self.__height)
