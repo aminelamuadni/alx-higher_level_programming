@@ -4,7 +4,7 @@
 Module for defining a rectangle.
 
 This module provides functionalities related to a rectangle, including
-properties like width, height, and methods to calculate area, perimeter, 
+properties like width, height, and methods to calculate area, perimeter,
 and its string representation.
 """
 
