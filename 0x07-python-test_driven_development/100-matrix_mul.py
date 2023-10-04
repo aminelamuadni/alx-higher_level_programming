@@ -45,4 +45,3 @@ def matrix_mul(m_a, m_b):
         for row_a in m_a
     ]
     return result
-
