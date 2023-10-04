@@ -3,6 +3,7 @@
 This module defines the LockedClass.
 """
 
+
 class LockedClass:
     """
     A class that prevents the user from dynamically creating new instance
