@@ -30,4 +30,3 @@ def text_indentation(text):
             start_idx = idx + 1
     if start_idx < len(text):
         print(text[start_idx:].strip(), end="")
-
