@@ -17,4 +17,3 @@ def lazy_matrix_mul(m_a, m_b):
     """
     # Use numpy's matmul function to multiply the matrices
     return np.matmul(m_a, m_b)
-
