@@ -28,3 +28,21 @@ Check TypeError for None argument.
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer
+
+Check float overflow.
+>>> add_integer(float('inf'), 1)
+Traceback (most recent call last):
+...
+OverflowError: Float overflow
+
+Check NaN for the first argument.
+>>> add_integer(float('NaN'), 1)
+Traceback (most recent call last):
+...
+ValueError: cannot convert float NaN to integer
+
+Check NaN for the second argument.
+>>> add_integer(1, float('NaN'))
+Traceback (most recent call last):
+...
+ValueError: cannot convert float NaN to integer
