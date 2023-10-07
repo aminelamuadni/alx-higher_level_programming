@@ -33,7 +33,7 @@ Check float overflow.
 >>> add_integer(float('inf'), 1)
 Traceback (most recent call last):
 ...
-OverflowError: Float overflow
+OverflowError: cannot convert float infinity to integer
 
 Check NaN for the first argument.
 >>> add_integer(float('NaN'), 1)
