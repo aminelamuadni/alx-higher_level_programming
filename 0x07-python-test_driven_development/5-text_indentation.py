@@ -26,7 +26,7 @@ def text_indentation(text):
     start_idx = 0
     for idx, char in enumerate(text):
         if char in ".?:":
-            print(text[start_idx:idx + 1].strip(), end="\n")
+            print(text[start_idx:idx + 1].strip(), end="\n\n")
             start_idx = idx + 1
     if start_idx < len(text):
         print(text[start_idx:].strip(), end="")
