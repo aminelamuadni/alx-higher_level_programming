@@ -1,27 +1,62 @@
->>> bg = __import__('7-base_geometry').BaseGeometry()
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>> bg = BaseGeometry()
+
+>>> type(bg)
+<class '7-base_geometry.BaseGeometry'>
+
 >>> bg.area()
 Traceback (most recent call last):
 ...
 Exception: area() is not implemented
 
->>> bg.integer_validator("test_value", 5)
+>>> bg.integer_validator("valid_number", 1)
 
->>> bg.integer_validator("string_value", "Hello")
+>>> bg.integer_validator("invalid_number", "number")
 Traceback (most recent call last):
 ...
-TypeError: string_value must be an integer
+TypeError: invalid_number must be an integer
 
->>> bg.integer_validator("negative_value", -10)
+>>> bg.integer_validator("invalid_true", True)
 Traceback (most recent call last):
 ...
-ValueError: negative_value must be greater than 0
+TypeError: invalid_true must be an integer
 
->>> bg.integer_validator("zero_value", 0)
+>>> bg.integer_validator("invalid_tuple", (1,))
 Traceback (most recent call last):
 ...
-ValueError: zero_value must be greater than 0
+TypeError: invalid_tuple must be an integer
 
->>> bg.integer_validator("float_value", 5.5)
+>>> bg.integer_validator("invalid_list", [3])
 Traceback (most recent call last):
 ...
-TypeError: float_value must be an integer
+TypeError: invalid_list must be an integer
+
+>>> bg.integer_validator("invalid_set", {3, 4})
+Traceback (most recent call last):
+...
+TypeError: invalid_set must be an integer
+
+>>> bg.integer_validator("invalid_none", None)
+Traceback (most recent call last):
+...
+TypeError: invalid_none must be an integer
+
+>>> bg.integer_validator("invalid_int", -1)
+Traceback (most recent call last):
+...
+ValueError: invalid_int must be greater than 0
+
+>>> bg.integer_validator("invalid_zero", 0)
+Traceback (most recent call last):
+...
+ValueError: invalid_zero must be greater than 0
+
+>>> bg.integer_validator()
+Traceback (most recent call last):
+...
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+>>> bg.integer_validator("name_only")
+Traceback (most recent call last):
+...
+TypeError: integer_validator() missing 1 required positional argument: 'value'
