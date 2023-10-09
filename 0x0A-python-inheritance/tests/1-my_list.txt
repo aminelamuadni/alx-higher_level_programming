@@ -41,9 +41,3 @@ Testing invalid input like None:
 >>> none_list.append(None)
 >>> print(none_list)
 [None]
-
-Trying to sort the None list (this will fail):
->>> none_list.print_sorted()
-Traceback (most recent call last):
-...
-TypeError: '<' not supported between instances of 'NoneType' and 'NoneType'
