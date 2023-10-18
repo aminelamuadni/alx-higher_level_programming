@@ -10,6 +10,7 @@ for all derived classes.
 import turtle
 import csv
 import json
+from models.rectangle import Rectangle
 
 
 class Base:
@@ -191,9 +192,9 @@ class Base:
             for _ in range(2):
                 t.forward(rect.width)
                 t.left(90)
-                if cls.__name__ == "Rectangle":
+                if isinstance(rect, Rectangle):
                     t.forward(rect.height)
-                elif cls.__name__ == "Square":
+                else:
                     t.forward(rect.size)
                 t.left(90)
 
