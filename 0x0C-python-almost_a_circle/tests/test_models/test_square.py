@@ -181,6 +181,8 @@ class TestSquare(unittest.TestCase):
         """
         Test the save_to_file class method when an empty list is provided.
         """
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
         Square.save_to_file([])
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
@@ -191,10 +193,11 @@ class TestSquare(unittest.TestCase):
         """
         s = Square(1, id=1)
         Square.save_to_file([s])
+
         with open("Square.json", "r") as file:
-            expected_content = {"id": 1, "size": 1, "x": 0, "y": 0}
-            actual_content = json.loads(file.read())
-            self.assertDictEqual(actual_content[0], expected_content)
+            contents = json.load(file)
+            expected = [{"id": 1, "size": 1, "x": 0, "y": 0}]
+            self.assertEqual(contents, expected)
 
     def test_load_from_file_when_file_missing(self):
         """
