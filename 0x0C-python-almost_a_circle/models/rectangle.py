@@ -67,6 +67,11 @@ class Rectangle(Base):
         """Returns the area value of the Rectangle instance."""
         return self.__width * self.__height
 
+    def display(self):
+        """Display the rectangle using the character #."""
+        for _ in range(self.height):
+            print("#" * self.width)
+
     def __attribute_validation(self, name, value, is_size=True):
         """Private method to validate attribute values."""
         if type(value) is not int:
