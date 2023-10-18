@@ -83,5 +83,17 @@ class TestBase(unittest.TestCase):
 
         os.remove("MockClass.json")
 
+    def test_from_json_string(self):
+        """Tests the from_json_string method of the Base class."""
+
+        self.assertEqual(Base.from_json_string('[]'), [])
+        
+        json_str = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}]'
+        self.assertEqual(Base.from_json_string(json_str), [{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}])
+
+        self.assertEqual(Base.from_json_string(None), [])
+
+        self.assertEqual(Base.from_json_string(""), [])
+
 if __name__ == "__main__":
     unittest.main()
