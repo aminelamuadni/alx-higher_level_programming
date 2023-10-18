@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
 This module contains the Base class which serves as the
-"base" for all other classes in this project. The main 
-purpose of the Base class is to manage the `id` attribute 
+"base" for all other classes in this project. The main
+purpose of the Base class is to manage the `id` attribute
 for all derived classes.
 """
 
