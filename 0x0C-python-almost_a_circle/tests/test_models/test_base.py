@@ -4,6 +4,7 @@ This module contains the unit tests for the Base class.
 """
 
 
+import json
 import unittest
 from models.base import Base
 
@@ -45,6 +46,19 @@ class TestBase(unittest.TestCase):
 
         b = Base([1, 2, 3])
         self.assertEqual(b.id, [1, 2, 3])
+
+    def test_to_json_string(self):
+        """Tests the to_json_string method of the Base class."""
+
+        self.assertEqual(Base.to_json_string([]), "[]")
+
+        self.assertEqual(Base.to_json_string(None), "[]")
+
+        list_dicts = [{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}]
+        json_str = Base.to_json_string(list_dicts)
+        self.assertEqual(json.loads(json_str), list_dicts)
+
+        self.assertIsInstance(json_str, str)
 
 if __name__ == "__main__":
     unittest.main()
