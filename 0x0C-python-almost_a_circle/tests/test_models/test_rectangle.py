@@ -141,5 +141,38 @@ class TestRectangle(unittest.TestCase):
         r1.update(89, 2, 3, 4, 5, 6, 7)
         self.assertEqual(r1.y, 5)
 
+    def test_update_with_kwargs(self):
+        """Test the update method of the Rectangle class using **kwargs."""
+
+        r1 = Rectangle(10, 10, 10, 10)
+
+        r1.update(height=1)
+        self.assertEqual(r1.height, 1)
+
+        r1.update(width=2, x=3)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.x, 3)
+        
+        r1.update(y=4, id=89, width=5)
+        self.assertEqual(r1.y, 4)
+        self.assertEqual(r1.id, 89)
+        self.assertEqual(r1.width, 5)
+
+        r1.update(non_existent_attr=999)
+        with self.assertRaises(AttributeError):
+            r1.non_existent_attr
+
+    def test_update_with_args_and_kwargs(self):
+        """Test the update method of the Rectangle class using both *args and **kwargs."""
+
+        r2 = Rectangle(5, 5, 5, 5)
+
+        r2.update(100, 6, 7, width=8, x=9)
+        self.assertEqual(r2.id, 100)
+        self.assertEqual(r2.width, 6)
+        self.assertEqual(r2.height, 7)
+        self.assertEqual(r2.x, 5)
+        self.assertEqual(r2.y, 5)
+
 if __name__ == "__main__":
     unittest.main()
