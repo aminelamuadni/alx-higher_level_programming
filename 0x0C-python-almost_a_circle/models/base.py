@@ -7,6 +7,7 @@ for all derived classes.
 """
 
 
+import turtle
 import csv
 import json
 
@@ -166,3 +167,40 @@ class Base:
             return objs
         except IOError:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """
+        Open a window to draw Rectangles and Squares using Turtle graphics.
+
+        Args:
+            list_rectangles (list): Rectangles to draw.
+            list_squares (list): Squares to draw.
+        """
+
+        screen = turtle.Screen()
+        screen.bgcolor("white")
+        t = turtle.Turtle()
+        t.speed(5)
+
+        def draw_shape(rect):
+            t.penup()
+            t.goto(rect.x, rect.y)
+            t.pendown()
+            t.color("blue")
+            for _ in range(2):
+                t.forward(rect.width)
+                t.left(90)
+                if isinstance(rect, Rectangle):
+                    t.forward(rect.height)
+                else:
+                    t.forward(rect.size)
+                t.left(90)
+
+        for rect in list_rectangles:
+            draw_shape(rect)
+
+        for square in list_squares:
+            draw_shape(square)
+
+        turtle.mainloop()
