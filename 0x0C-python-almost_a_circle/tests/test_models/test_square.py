@@ -4,6 +4,7 @@ This module contains the unit tests for the Square class.
 """
 
 
+import json
 import os
 import unittest
 from models.square import Square
@@ -173,7 +174,8 @@ class TestSquare(unittest.TestCase):
         Test the to_dictionary method of the Square class.
         """
         s = Square(5, 1, 2, 100)
-        self.assertDictEqual(s.to_dictionary(), {'id': 100, 'size': 5, 'x': 1, 'y': 2})
+        expected_dict = {'id': 100, 'size': 5, 'x': 1, 'y': 2}
+        self.assertDictEqual(s.to_dictionary(), expected_dict)
 
     def test_save_to_file_with_empty_list(self):
         """
@@ -187,8 +189,12 @@ class TestSquare(unittest.TestCase):
         """
         Test the save_to_file class method with a valid Square instance.
         """
-        s = Square(1)
+        s = Square(1, id=1)
         Square.save_to_file([s])
+        with open("Square.json", "r") as file:
+            expected_content = {"id": 1, "size": 1, "x": 0, "y": 0}
+            actual_content = json.loads(file.read())
+            self.assertDictEqual(actual_content[0], expected_content)
 
     def test_load_from_file_when_file_missing(self):
         """
@@ -208,6 +214,28 @@ class TestSquare(unittest.TestCase):
         Square.save_to_file([s])
         squares = Square.load_from_file()
         self.assertEqual(len(squares), 1)
+
+    def test_invalid_string_size(self):
+        """
+        Test initializing Square with a string size.
+        """
+        with self.assertRaises(TypeError):
+            Square("1")
+
+    def test_invalid_negative_size(self):
+        """
+        Test initializing Square with a negative size.
+        """
+        with self.assertRaises(ValueError):
+            Square(-1)
+
+    def test_save_to_file_with_None(self):
+        """
+        Test the save_to_file class method when None is provided.
+        """
+        Square.save_to_file(None)
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
 
 if __name__ == "__main__":
     unittest.main()
