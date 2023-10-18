@@ -7,7 +7,6 @@ for all derived classes.
 """
 
 
-import os
 import json
 
 
@@ -93,11 +92,12 @@ class Base:
         """
         filename = cls.__name__ + ".json"
 
-        if not os.path.exists(filename):
+        try:
+            with open(filename, 'r') as file:
+                json_string = file.read()
+
+            list_of_dicts = cls.from_json_string(json_string)
+            return [cls.create(**d) for d in list_of_dicts]
+
+        except IOError:
             return []
-
-        with open(filename, 'r') as file:
-            json_string = file.read()
-
-        list_of_dicts = cls.from_json_string(json_string)
-        return [cls.create(**d) for d in list_of_dicts]
