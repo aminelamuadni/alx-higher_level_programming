@@ -90,7 +90,7 @@ class Rectangle(Base):
     def update(self, *args, **kwargs):
         """
         Updates the attributes of the Rectangle instance.
-        
+
         Args:
             *args: Ordered arguments that represent the attributes.
             Order: 'id', 'width', 'height', 'x', 'y'.
