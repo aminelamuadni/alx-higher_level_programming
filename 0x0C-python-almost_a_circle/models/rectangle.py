@@ -87,6 +87,24 @@ class Rectangle(Base):
             print(' ' * self.x, end='')
             print('#' * self.width)
 
+    def update(self, *args):
+        """
+        Update the attributes of the Rectangle instance.
+
+        *args is a list of ordered arguments
+        representing the attributes in order: id, width, height, x, y.
+        1. id
+        2. width
+        3. height
+        4. x
+        5. y
+        """
+        attributes = ['id', 'width', 'height', 'x', 'y']
+
+        for index, value in enumerate(args):
+            if index < len(attributes):
+                setattr(self, attributes[index], value)
+
     def __attribute_validation(self, name, value, is_size=True):
         """Private method to validate attribute values."""
         if type(value) is not int:
