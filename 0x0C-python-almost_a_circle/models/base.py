@@ -191,9 +191,9 @@ class Base:
             for _ in range(2):
                 t.forward(rect.width)
                 t.left(90)
-                if isinstance(rect, Rectangle):
+                if cls.__name__ == "Rectangle":
                     t.forward(rect.height)
-                else:
+                elif cls.__name__ == "Square":
                     t.forward(rect.size)
                 t.left(90)
 
