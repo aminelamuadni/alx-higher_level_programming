@@ -108,6 +108,16 @@ class Rectangle(Base):
                 if key in attributes:
                     setattr(self, key, value)
 
+    def to_dictionary(self):
+        """Return the dictionary representation of a Rectangle."""
+        return {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+        }
+
     def __attribute_validation(self, name, value, is_size=True):
         """Private method to validate attribute values."""
         if type(value) is not int:
