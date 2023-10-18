@@ -221,10 +221,5 @@ class TestRectangle(unittest.TestCase):
         with open("Rectangle.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
-    def test_string_size_in_square(self):
-        """Tests that size is an integer in Square."""
-        with self.assertRaisesRegex(TypeError, "size must be an integer"):
-            Square("1")
-
 if __name__ == "__main__":
     unittest.main()
