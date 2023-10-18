@@ -4,6 +4,7 @@ This module contains the unit tests for the Square class.
 """
 
 
+import os
 import unittest
 from models.square import Square
 
@@ -140,6 +141,73 @@ class TestSquare(unittest.TestCase):
         
         self.assertEqual(s1_dict, expected_dict)
         self.assertIsInstance(s1_dict, dict)
+
+    def test_invalid_constructor_args(self):
+        """
+        Test invalid arguments provided to the Square constructor.
+        """
+        with self.assertRaises(TypeError):
+            Square(1, "2")
+        
+        with self.assertRaises(TypeError):
+            Square(1, 2, "3")
+        
+        with self.assertRaises(ValueError):
+            Square(1, -2)
+
+        with self.assertRaises(ValueError):
+            Square(1, 2, -3)
+
+        with self.assertRaises(ValueError):
+            Square(0)
+
+    def test_str_representation(self):
+        """
+        Test the __str__ method for the Square class.
+        """
+        s = Square(5, 1, 2, 99)
+        self.assertEqual(str(s), "[Square] (99) 1/2 - 5")
+
+    def test_to_dictionary_method(self):
+        """
+        Test the to_dictionary method of the Square class.
+        """
+        s = Square(5, 1, 2, 100)
+        self.assertDictEqual(s.to_dictionary(), {'id': 100, 'size': 5, 'x': 1, 'y': 2})
+
+    def test_save_to_file_with_empty_list(self):
+        """
+        Test the save_to_file class method when an empty list is provided.
+        """
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_with_valid_square(self):
+        """
+        Test the save_to_file class method with a valid Square instance.
+        """
+        s = Square(1)
+        Square.save_to_file([s])
+
+    def test_load_from_file_when_file_missing(self):
+        """
+        Test the load_from_file class method when the file doesn't exist.
+        """
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
+        squares = Square.load_from_file()
+        print(squares)
+        self.assertEqual(squares, [])
+
+    def test_load_from_file_when_file_exists(self):
+        """
+        Test the load_from_file class method when the file exists.
+        """
+        s = Square(1)
+        Square.save_to_file([s])
+        squares = Square.load_from_file()
+        self.assertEqual(len(squares), 1)
 
 if __name__ == "__main__":
     unittest.main()
