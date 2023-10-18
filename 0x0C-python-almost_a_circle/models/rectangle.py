@@ -63,6 +63,10 @@ class Rectangle(Base):
         self.__attribute_validation("y", value, False)
         self.__y = value
 
+    def area(self):
+        """Returns the area value of the Rectangle instance."""
+        return self.__width * self.__height
+
     def __attribute_validation(self, name, value, is_size=True):
         """Private method to validate attribute values."""
         if type(value) is not int:
