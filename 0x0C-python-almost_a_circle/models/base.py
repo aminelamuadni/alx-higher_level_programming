@@ -7,6 +7,7 @@ for all derived classes.
 """
 
 
+import csv
 import json
 
 
@@ -99,5 +100,69 @@ class Base:
             list_of_dicts = cls.from_json_string(json_string)
             return [cls.create(**d) for d in list_of_dicts]
 
+        except IOError:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        Writes the objects' data to a CSV file specific to the class.
+
+        Args:
+            list_objs (list): A list of objects to be serialized to a CSV file.
+        """
+        filename = cls.__name__ + ".csv"
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+
+            if cls.__name__ == "Rectangle":
+                for obj in list_objs:
+                    writer.writerow([
+                        obj.id,
+                        obj.width,
+                        obj.height,
+                        obj.x,
+                        obj.y
+                    ])
+            elif cls.__name__ == "Square":
+                for obj in list_objs:
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        Loads objects' data from a CSV file specific to the class.
+
+        Returns:
+            list: A list of objects loaded from the CSV file.
+        """
+        filename = cls.__name__ + ".csv"
+        objs = []
+
+        try:
+            with open(filename, 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    if cls.__name__ == "Rectangle":
+                        objs.append(
+                            cls(
+                                int(row[1]),
+                                int(row[2]),
+                                int(row[3]),
+                                int(row[4]),
+                                int(row[0])
+                            )
+                        )
+                    elif cls.__name__ == "Square":
+                        objs.append(
+                            cls(
+                                int(row[1]),
+                                int(row[2]),
+                                int(row[3]),
+                                int(row[0])
+                            )
+                        )
+
+            return objs
         except IOError:
             return []
