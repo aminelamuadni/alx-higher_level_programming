@@ -4,9 +4,11 @@ This module contains the unit tests for the Base class.
 """
 
 
+import os
 import json
 import unittest
 from models.base import Base
+
 
 class TestBase(unittest.TestCase):
     """
@@ -59,6 +61,27 @@ class TestBase(unittest.TestCase):
         self.assertEqual(json.loads(json_str), list_dicts)
 
         self.assertIsInstance(json_str, str)
+
+    def test_save_to_file(self):
+        """Tests the save_to_file method of the Base class."""
+
+        class MockClass(Base):
+            def to_dictionary(self):
+                return {"id": self.id}
+
+        obj1 = MockClass()
+        obj2 = MockClass()
+
+        MockClass.save_to_file([obj1, obj2])
+
+        self.assertTrue(os.path.isfile("MockClass.json"))
+
+        with open("MockClass.json", "r") as file:
+            content = json.load(file)
+            expected = [{"id": 1}, {"id": 2}]
+            self.assertEqual(content, expected)
+
+        os.remove("MockClass.json")
 
 if __name__ == "__main__":
     unittest.main()
