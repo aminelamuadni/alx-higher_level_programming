@@ -93,5 +93,13 @@ class TestRectangle(unittest.TestCase):
         sys.stdout = sys.__stdout__
         self.assertEqual(output, expected_output2)
 
+    def test_str(self):
+        """Tests the __str__ method of the Rectangle class."""
+        r1 = Rectangle(4, 6, 2, 1, 12)
+        r2 = Rectangle(5, 5, 1)
+
+        self.assertEqual(str(r1), "[Rectangle] (12) 2/1 - 4/6")
+        self.assertEqual(str(r2), "[Rectangle] (1) 1/0 - 5/5")
+
 if __name__ == "__main__":
     unittest.main()
