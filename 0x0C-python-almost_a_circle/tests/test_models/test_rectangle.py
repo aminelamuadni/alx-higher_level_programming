@@ -4,6 +4,8 @@ This module contains the unit tests for the Rectangle class.
 """
 
 
+from io import StringIO
+import sys
 import unittest
 from models.rectangle import Rectangle
 
@@ -96,10 +98,26 @@ class TestRectangle(unittest.TestCase):
     def test_str(self):
         """Tests the __str__ method of the Rectangle class."""
         r1 = Rectangle(4, 6, 2, 1, 12)
-        r2 = Rectangle(5, 5, 1)
+        r2 = Rectangle(5, 5, 1, id=1)
 
         self.assertEqual(str(r1), "[Rectangle] (12) 2/1 - 4/6")
         self.assertEqual(str(r2), "[Rectangle] (1) 1/0 - 5/5")
+
+    def test_display_with_x_y(self):
+        """
+        Tests the display method of the Rectangle class
+        considering x and y.
+        """
+        r1 = Rectangle(2, 3, 2, 2)
+
+        expected_output = "\n\n  ##\n  ##\n  ##\n"
+
+        temp_stdout = StringIO()
+        sys.stdout = temp_stdout
+        r1.display()
+        output = temp_stdout.getvalue()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output, expected_output)
 
 if __name__ == "__main__":
     unittest.main()
