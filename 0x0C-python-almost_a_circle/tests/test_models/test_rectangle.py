@@ -37,5 +37,28 @@ class TestRectangle(unittest.TestCase):
         r3 = Rectangle(10, 2, 0, 0, 12)
         self.assertEqual(r3.id, 12)
 
+    def test_type_validation(self):
+        """Tests the type validation of the attributes."""
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            Rectangle(10, "2")
+
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            r = Rectangle(10, 2)
+            r.x = {}
+
+    def test_value_validation(self):
+        """Tests the value validation of the attributes."""
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r = Rectangle(0, 2)
+
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r = Rectangle(10, 0)
+
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            r = Rectangle(10, 2, -1, 0)
+
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            r = Rectangle(10, 2, 0, -1)
+
 if __name__ == "__main__":
     unittest.main()
