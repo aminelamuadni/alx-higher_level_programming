@@ -174,20 +174,57 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r2.x, 5)
         self.assertEqual(r2.y, 5)
 
-def test_to_dictionary(self):
-    """Test the to_dictionary method of the Rectangle class."""
-    
-    r1 = Rectangle(10, 2, 1, 9)
-    r1_dict = r1.to_dictionary()
-    expected_dict1 = {'id': r1.id, 'width': 10, 'height': 2, 'x': 1, 'y': 9}
-    self.assertEqual(r1_dict, expected_dict1)
-    self.assertTrue(isinstance(r1_dict, dict))
+    def test_to_dictionary(self):
+        """Test the to_dictionary method of the Rectangle class."""
+        
+        r1 = Rectangle(10, 2, 1, 9)
+        r1_dict = r1.to_dictionary()
+        expected_dict1 = {'id': r1.id, 'width': 10, 'height': 2, 'x': 1, 'y': 9}
+        self.assertEqual(r1_dict, expected_dict1)
+        self.assertTrue(isinstance(r1_dict, dict))
 
-    r2 = Rectangle(3, 5, 1, 2, 98)
-    r2_dict = r2.to_dictionary()
-    expected_dict2 = {'id': 98, 'width': 3, 'height': 5, 'x': 1, 'y': 2}
-    self.assertEqual(r2_dict, expected_dict2)
-    self.assertTrue(isinstance(r2_dict, dict))
+        r2 = Rectangle(3, 5, 1, 2, 98)
+        r2_dict = r2.to_dictionary()
+        expected_dict2 = {'id': 98, 'width': 3, 'height': 5, 'x': 1, 'y': 2}
+        self.assertEqual(r2_dict, expected_dict2)
+        self.assertTrue(isinstance(r2_dict, dict))
+
+    def test_string_width(self):
+        """Tests that width is an integer."""
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Rectangle("1", 2)
+
+    def test_string_x(self):
+        """Tests that x is an integer."""
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            Rectangle(1, 2, "3")
+
+    def test_string_y(self):
+        """Tests that y is an integer."""
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            Rectangle(1, 2, 3, "4")
+
+    def test_negative_width(self):
+        """Tests that width is greater than zero."""
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            Rectangle(-1, 2)
+
+    def test_save_to_file_None(self):
+        """Tests save_to_file method with None as the list of objects."""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_empty(self):
+        """Tests save_to_file method with an empty list."""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_string_size_in_square(self):
+        """Tests that size is an integer in Square."""
+        with self.assertRaisesRegex(TypeError, "size must be an integer"):
+            Square("1")
 
 if __name__ == "__main__":
     unittest.main()
