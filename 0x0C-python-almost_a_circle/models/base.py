@@ -7,6 +7,7 @@ for all derived classes.
 """
 
 
+import os
 import json
 
 
@@ -84,3 +85,19 @@ class Base:
 
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """
+        Returns a list of instances from a file.
+        """
+        filename = cls.__name__ + ".json"
+
+        if not os.path.exists(filename):
+            return []
+
+        with open(filename, 'r') as file:
+            json_string = file.read()
+
+        list_of_dicts = cls.from_json_string(json_string)
+        return [cls.create(**d) for d in list_of_dicts]
