@@ -77,6 +77,16 @@ class Rectangle(Base):
         for _ in range(self.height):
             print("#" * self.width)
 
+    def display(self):
+        """Prints in stdout the Rectangle instance with the character #."""
+
+        for _ in range(self.y):
+            print()
+
+        for _ in range(self.height):
+            print(' ' * self.x, end='')
+            print('#' * self.width)
+
     def __attribute_validation(self, name, value, is_size=True):
         """Private method to validate attribute values."""
         if type(value) is not int:
