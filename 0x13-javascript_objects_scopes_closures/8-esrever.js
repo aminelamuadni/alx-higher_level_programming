@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
 exports.esrever = function (list) {
-  let list = [];
+  const reversedList = [];
   for (let i = list.length - 1; i >= 0; i--) {
-    list.push(list[i]);
+    reversedList.push(list[i]);
   }
-  return list;
+  return reversedList;
 };
