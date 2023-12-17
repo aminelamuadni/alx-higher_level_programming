@@ -25,7 +25,8 @@ def filter_states(username, password, db_name):
         query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
         cur.execute(query)
         for row in cur.fetchall():
-            print(row)
+            if row[1].startswith("N"):
+                print(row)
     except Exception as e:
         print(f"Error: {e}")
     finally:
