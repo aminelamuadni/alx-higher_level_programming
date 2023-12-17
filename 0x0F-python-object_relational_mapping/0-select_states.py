@@ -17,8 +17,10 @@ the 'states' table, and prints each state's id and name in ascending order by
 id.
 """
 
+
 import MySQLdb
 import sys
+
 
 def list_states(username, password, db_name):
     """
