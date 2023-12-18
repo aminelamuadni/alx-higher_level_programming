@@ -8,6 +8,7 @@ contained in the database 'hbtn_0e_101_usa'.
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from relationship_state import Base, State
+from relationship_city import City
 import sys
 
 
@@ -22,6 +23,7 @@ def list_states_and_cities(username, password, db_name):
         ),
         pool_pre_ping=True
     )
+
     Session = sessionmaker(bind=engine)
     session = Session()
 
