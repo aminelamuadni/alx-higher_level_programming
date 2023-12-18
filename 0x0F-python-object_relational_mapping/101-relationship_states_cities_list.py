@@ -22,7 +22,6 @@ def list_states_and_cities(username, password, db_name):
         ),
         pool_pre_ping=True
     )
-    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
 
