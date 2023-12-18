@@ -5,7 +5,7 @@ This script prints all City objects from the database 'hbtn_0e_14_usa'.
 
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, joinedload
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 from model_city import City
 import sys
@@ -24,9 +24,11 @@ def list_cities_by_state(username, password, db_name):
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    cities = session.query(City).join(State).order_by(City.id).all()
-    for city in cities:
-        print(f"{city.state.name}: ({city.id}) {city.name}")
+    results = session.query(City, State).filter(
+        City.state_id == State.id
+    ).order_by(City.id).all()
+    for city, state in results:
+        print(f"{state.name}: ({city.id}) {city.name}")
     session.close()
 
 
