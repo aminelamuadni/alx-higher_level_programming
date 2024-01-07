@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """
 A script to fetch and display the status from a URL using the urllib package.
-This script demonstrates basic network programming concepts like making an HTTP
-GET request and handling the response in Python.
 """
 
 
