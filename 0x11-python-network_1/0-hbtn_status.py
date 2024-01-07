@@ -14,7 +14,8 @@ def fetch_status(url):
     Fetches the status from a given URL using urllib and prints the response
     content, its type, and the UTF-8 decoded content.
     """
-    with urllib.request.Request(url) as response:
+    request = urllib.request.Request(url)
+    with urllib.request.urlopen(request) as response:
         content = response.read()
 
         print("Body response:")
