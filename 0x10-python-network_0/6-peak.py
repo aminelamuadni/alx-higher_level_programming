@@ -5,6 +5,7 @@ Contains function find_peak: Finds a peak in a list of unsorted integers.
 Uses modified binary search for efficiency.
 """
 
+
 def find_peak(list_of_integers):
     """
     Finds a peak in a list of unsorted integers.
