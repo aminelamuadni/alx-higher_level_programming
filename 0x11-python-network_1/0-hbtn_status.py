@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
 A script to fetch and display the status from a URL using the urllib package.
+This script demonstrates basic network programming concepts like making an HTTP
+GET request and handling the response in Python.
 """
 
 
@@ -12,7 +14,7 @@ def fetch_status(url):
     Fetches the status from a given URL using urllib and prints the response
     content, its type, and the UTF-8 decoded content.
     """
-    with urllib.request.urlopen(url) as response:
+    with urllib.request.Request(url) as response:
         content = response.read()
 
         print("Body response:")
