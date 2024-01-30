@@ -7,13 +7,14 @@ const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 request(apiUrl, (error, response, body) => {
   if (error) {
     console.error('error:', error);
+    return;
   }
 
   const characters = JSON.parse(body).characters;
   printCharacters(characters, 0);
 });
 
-function printCharacters(characters, index) {
+function printCharacters (characters, index) {
   if (index >= characters.length) {
     return;
   }
@@ -21,6 +22,7 @@ function printCharacters(characters, index) {
   request(characters[index], (error, response, body) => {
     if (error) {
       console.error('error:', error);
+      return;
     }
 
     console.log(JSON.parse(body).name);
